@@ -1,5 +1,6 @@
 package com.openclassrooms.magicgithub.ui.user_list
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -17,12 +18,13 @@ class ListUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val deleteButton: ImageButton = itemView.findViewById(R.id.item_list_user_delete_button)
 
     fun bind(user: User, callback: UserListAdapter.Listener) {
-        Glide.with(itemView.context)
-            .load(user.avatarUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .into(avatar)
-        username.text = user.login
-        deleteButton.setOnClickListener { callback.onClickDelete(user) }
-    }
+    Glide.with(itemView.context)
+        .load(user.avatarUrl)
+        .apply(RequestOptions.circleCropTransform())
+        .into(avatar)
+    username.text = user.login
+    deleteButton.setOnClickListener { callback.onClickDelete(user) }
+    itemView.setBackgroundColor(if (user.isActive) Color.WHITE else Color.RED)
+}
 
 }
